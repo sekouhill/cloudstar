@@ -20,25 +20,3 @@ network_interface {
 
 }
 
-resource "google_compute_instance" "saopaolo-vm" {
-  name         = "saopaolo-vm"
-  machine_type = "e2-medium"
-  zone         = "southamerica-east1"
-
-boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-12"
-    }
-  }
-
-network_interface {
-    subnetwork = google_compute_subnetwork.saopaolo-vm.name 
-    access_config {
-      // Ephemeral public IP 
-    }
-  }
-
-metadata_startup_script = file("./startup.sh")
-
-}
-
